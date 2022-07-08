@@ -1,7 +1,9 @@
 package webdriver;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -16,8 +18,8 @@ public class Topic_01_Setup_Environment {
 
         @BeforeClass
         public void beforeClass() {
-            System.setProperty("webdriver.gecko.driver", "./drivers/geckodriver");
-            driver = new FirefoxDriver();
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver();
             driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             driver.manage().window().maximize();
             driver.get("https://www.facebook.com/");
