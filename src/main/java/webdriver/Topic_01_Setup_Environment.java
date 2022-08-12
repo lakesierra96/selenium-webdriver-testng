@@ -18,8 +18,8 @@ public class Topic_01_Setup_Environment {
 
         @BeforeClass
         public void beforeClass() {
-            WebDriverManager.chromedriver().setup();
-            driver = new ChromeDriver();
+            System.setProperty("webdriver.gecko.driver", projectPath + "/drivers/geckodriver");
+            driver = new FirefoxDriver();
             driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
             driver.manage().window().maximize();
             driver.get("https://www.facebook.com/");
