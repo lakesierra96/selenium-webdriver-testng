@@ -26,23 +26,13 @@ public class Topic_05_WebBrowser_Element {
 
         @Test
         public void TC_01_Navigate_Function() {
-            driver.findElement(By.linkText("My Account")).click();
-            driver.findElement(By.linkText("http://live.techpanda.org/index.php/customer/account/create/")).click();
+            driver.findElement(By.xpath("//div[@class='footer']//a[text()='My Account']")).click();
+            driver.findElement(By.xpath("//span[text()='Create an Account']")).click();
             Assert.assertEquals(driver.getCurrentUrl(), "http://live.techpanda.org/index.php/customer/account/create/");
             driver.navigate().back();
-            Assert.assertEquals(driver.getCurrentUrl(), "http://live.techpanda.org/index.php/customer/account/create/");
+            Assert.assertEquals(driver.getCurrentUrl(), "http://live.techpanda.org/index.php/customer/account/login/");
             driver.navigate().forward();
             Assert.assertEquals(driver.getTitle(), "Create New Customer Account");
-        }
-
-        @Test
-        public void TC_02_Register_Invalid_Email() {
-
-        }
-
-        @Test
-        public void TC_03_Register_Invalid_Phone_Number() {
-            // Login form displayed
         }
 
         @AfterClass
