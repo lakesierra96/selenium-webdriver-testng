@@ -20,11 +20,11 @@ public class Topic_05_WebBrowser_Element_P2 {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-        driver.get("https://automationfc.github.io/basic-form/index.html");
     }
 
     @Test
     public void TC_01_Is_Displayed() {
+        driver.get("https://automationfc.github.io/basic-form/index.html");
         if (driver.findElement(By.id("mail")).isDisplayed()) {
             driver.findElement(By.id("mail")).sendKeys("Automation");
             System.out.println("Display");
