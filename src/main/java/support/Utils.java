@@ -72,6 +72,16 @@ public class Utils {
     }
 
 
+    public static boolean isElementPresent(By locatorKey) {
+        try {
+            driver.findElement(locatorKey);
+            return true;
+        } catch (org.openqa.selenium.NoSuchElementException e) {
+            System.out.println("Element is not present");
+            return false;
+        }
+    }
+
     public static void checkPageIsReady() {
 
         JavascriptExecutor js = (JavascriptExecutor) driver;
