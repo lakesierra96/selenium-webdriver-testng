@@ -26,10 +26,9 @@ public class Topic_05_WebBrowser_Element_P3 {
     @Test
     public void TC_01_Is_Displayed() {
         visit("https://opensource-demo.orangehrmlive.com");
-        waitForElementPresent(By.xpath("//p[contains(text(),'Username')]"));
-        sleepInSecond(1);
-        String userField = driver.findElement(By.xpath("//p[contains(text(),'Username')]")).getText();
-        System.out.println(userField);
+        driver.findElement(By.name("username")).sendKeys("Admin");
+        driver.findElement(By.name("password")).sendKeys("admin123");
+        driver.findElement(By.xpath("//button[@type='submit']")).click();
     }
 
     @Test
