@@ -29,6 +29,13 @@ public class Topic_05_WebBrowser_Element_P3 {
         driver.findElement(By.name("username")).sendKeys("Admin");
         driver.findElement(By.name("password")).sendKeys("admin123");
         driver.findElement(By.xpath("//button[@type='submit']")).click();
+        click(By.xpath("//a[text()='Add Employee']"));
+        sendKey(By.name("firstName"), "Hugh");
+        sendKey(By.name("lastName"), "Pham");
+        String empID = getText(By.xpath("//input[@class='oxd-input oxd-input--active']"));
+        click(By.xpath("//button[@type='submit']"));
+        setWait();
+        System.out.println(getText(By.name("firstName")));
     }
 
     @Test
@@ -38,7 +45,7 @@ public class Topic_05_WebBrowser_Element_P3 {
 
     @AfterClass
     public void afterClass() {
-            driver.quit();
+//            driver.quit();
     }
 
     public void sleepInSecond(long miliSecond) {
