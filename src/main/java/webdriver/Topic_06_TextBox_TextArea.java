@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import static support.Utils.*;
 
-public class Topic_05_TextBox_TextArea {
+public class Topic_06_TextBox_TextArea {
     String firstName = "Hugh";
 
     @BeforeClass
@@ -50,12 +50,6 @@ public class Topic_05_TextBox_TextArea {
         click(By.xpath("//button[@type='submit']"));
         waitForElementPresent(By.xpath("//div[@class='oxd-table-body']//label"));
         click(By.xpath("//div[@class='oxd-table-body']//label"));
-
-    }
-
-    @Test
-    public void TC_02_MailChimp() {
-
     }
 
     @AfterClass
