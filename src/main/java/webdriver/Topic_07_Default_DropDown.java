@@ -66,6 +66,18 @@ public class Topic_07_Default_DropDown {
         Assert.assertEquals(getAttribute(By.id("Email"), "value"), email);
     }
 
+    @Test
+    public void TC_04_Default() {
+        visit("https://rode.com/en/support/where-to-buy");
+        select = new Select(getElement(By.id("country")));
+        select.selectByVisibleText("Vietnam");
+        waitForElementPresent(By.xpath("//h4[contains(text(),'Viet Thanh Company, Ltd')]"));
+        List<WebElement>  dealers = driver.findElements(By.cssSelector("div#map h4"));
+        for (WebElement element : dealers) {
+            System.out.println(element.getText());
+        }
+    }
+
     @AfterClass
     public void afterClass() {
 //            driver.quit();
