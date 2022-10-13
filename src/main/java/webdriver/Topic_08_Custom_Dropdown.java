@@ -52,6 +52,15 @@ public class Topic_08_Custom_Dropdown {
         }
 
         selectItemInCustomDropdown("salutation-button", "ul#salutation-menu li", "Mrs.");
+
+        selectItemInCustomDropdown("speed-button", "ul#speed-menu li", "Faster");
+    }
+
+    @Test
+    public void TC_02_JQuery_Dropdown_02() {
+        visit("https://www.honda.com.vn/o-to/du-toan-chi-phi");
+
+
     }
 
     @AfterClass
