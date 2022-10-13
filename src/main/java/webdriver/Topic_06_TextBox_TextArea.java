@@ -2,14 +2,12 @@ package webdriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static support.Utils.*;
@@ -27,7 +25,7 @@ public class Topic_06_TextBox_TextArea {
 
     @Test
     public void TC_01_TextBox_TextArea() {
-        visit("https://opensource-demo.orangehrmlive.com");
+        visit("https://jqueryui.com/resources/demos/selectmenu/default.html");
         driver.findElement(By.name("username")).sendKeys("Admin");
         driver.findElement(By.name("password")).sendKeys("admin123");
         driver.findElement(By.xpath("//button[@type='submit']")).click();
