@@ -2,10 +2,8 @@ package webdriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
@@ -59,7 +57,6 @@ public class Topic_08_Custom_Dropdown {
     @Test
     public void TC_02_JQuery_Dropdown_02() {
         visit("https://www.honda.com.vn/o-to/du-toan-chi-phi");
-
 
     }
 
