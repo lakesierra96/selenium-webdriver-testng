@@ -2,9 +2,11 @@ package webdriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -19,6 +21,8 @@ import static support.Utils.*;
 public class Topic_08_Custom_Dropdown {
     Random random;
     WebDriverWait wait;
+    JavascriptExecutor js;
+    Select select;
 
     @BeforeClass
     public void beforeClass() {
@@ -57,6 +61,8 @@ public class Topic_08_Custom_Dropdown {
     @Test
     public void TC_02_JQuery_Dropdown_02() {
         visit("https://www.honda.com.vn/o-to/du-toan-chi-phi");
+
+        selectItemInCustomDropdown("selectize-input", "button#selectize-input+div>a", "CR-V LSE (Đen Ánh)");
 
     }
 
