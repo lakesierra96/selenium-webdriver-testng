@@ -62,8 +62,16 @@ public class Topic_08_Custom_Dropdown {
     public void TC_02_JQuery_Dropdown_02() {
         visit("https://www.honda.com.vn/o-to/du-toan-chi-phi");
 
+        scrollToElement(By.cssSelector("div[class='carousel-item active home-page-slide-top']"));
+        //Co the viet cssLocator nhu tren hoac viet bang cach 2 thi chi can lay 1 phan div.carousel-item
+
+        sleepInSecond(3);
+
         selectItemInCustomDropdown("selectize-input", "button#selectize-input+div>a", "CR-V LSE (Đen Ánh)");
 
+        new Select(getElement(By.name("province"))).selectByVisibleText("Cần Thơ");
+
+        new Select(getElement(By.name("registration_fee"))).selectByVisibleText("Khu vực II");
     }
 
     @AfterClass
@@ -82,6 +90,11 @@ public class Topic_08_Custom_Dropdown {
                 item.click();
             }
         }
+    }
+
+    public void scrollToElement(By element) {
+        js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", getElement(element));
     }
 
     public void sleepInSecond(long miliSecond) {
