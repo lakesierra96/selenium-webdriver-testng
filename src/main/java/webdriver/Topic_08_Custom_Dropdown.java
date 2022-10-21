@@ -72,6 +72,8 @@ public class Topic_08_Custom_Dropdown {
         new Select(getElement(By.name("province"))).selectByVisibleText("Cần Thơ");
 
         new Select(getElement(By.name("registration_fee"))).selectByVisibleText("Khu vực II");
+
+
     }
 
     @AfterClass
