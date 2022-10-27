@@ -73,7 +73,13 @@ public class Topic_08_Custom_Dropdown {
 
         new Select(getElement(By.name("registration_fee"))).selectByVisibleText("Khu vực II");
 
+    }
 
+    @Test
+    public void TC_03_JQuery_Drodown_02() {
+        visit("https://react.semantic-ui.com/maximize/dropdown-example-selection/");
+
+        sleepInSecond(3);
     }
 
     @AfterClass
