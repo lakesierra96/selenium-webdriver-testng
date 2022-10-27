@@ -79,6 +79,7 @@ public class Topic_08_Custom_Dropdown {
     public void TC_03_JQuery_Drodown_02() {
         visit("https://react.semantic-ui.com/maximize/dropdown-example-selection/");
 
+        System.out.println("test");
     }
 
     @AfterClass
