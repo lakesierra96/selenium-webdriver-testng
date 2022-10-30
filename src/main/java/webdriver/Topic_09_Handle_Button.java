@@ -5,9 +5,11 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -36,50 +38,22 @@ public class Topic_09_Handle_Button {
     }
 
     @Test
-    public void TC_01_JQuery_Dropdown() {
-        visit("https://jqueryui.com/resources/demos/selectmenu/default.html");
+    public void TC_01_Handle_Button() {
+        visit("https://www.fahasa.com/customer/account/create");
 
-        click(By.id("number-button"));
-
-        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("li.ui-menu-item")));
-
-        List<WebElement> allItems = getElements(By.cssSelector("li.ui-menu-item"));
-
-        for (WebElement item : allItems) {
-            String actualItem = item.getText();
-            System.out.println(actualItem);
-            if (actualItem.equals("15")) {
-                click(By.id("ui-id-15"));
-            }
-        }
-
-        selectItemInCustomDropdown("salutation-button", "ul#salutation-menu li", "Mrs.");
-
-        selectItemInCustomDropdown("speed-button", "ul#speed-menu li", "Faster");
-    }
-
-    @Test
-    public void TC_02_JQuery_Dropdown_02() {
-        visit("https://www.honda.com.vn/o-to/du-toan-chi-phi");
-
-        scrollToElement(By.cssSelector("div[class='carousel-item active home-page-slide-top']"));
-        //Co the viet cssLocator nhu tren hoac viet bang cach 2 thi chi can lay 1 phan div.carousel-item
-
-        sleepInSecond(3);
-
-        selectItemInCustomDropdown("selectize-input", "button#selectize-input+div>a", "CR-V LSE (Đen Ánh)");
-
-        new Select(getElement(By.name("province"))).selectByVisibleText("Cần Thơ");
-
-        new Select(getElement(By.name("registration_fee"))).selectByVisibleText("Khu vực II");
-
-    }
-
-    @Test
-    public void TC_03_JQuery_Drodown_02() {
-        visit("https://react.semantic-ui.com/maximize/dropdown-example-selection/");
-
-        System.out.println("test");
+        click(By.id("moe-dontallow_button"));
+        driver.switchTo().frame("moe-onsite-campaign-635b4ff08dd87b080a5f46fb");
+        click(By.id("close-icon"));
+        Assert.assertTrue(getElement(By.cssSelector("li.popup-login-tab-login")).isEnabled());
+        Assert.assertFalse(getElement(By.cssSelector("button.fhs-btn-register")).isEnabled());
+        click(By.cssSelector("li.popup-login-tab-login"));
+        sendKey(By.id("login_username"), "abc@gmail.com");
+        sendKey(By.id("login_password"), "123456?a");
+        String cssColor = driver.findElement(By.cssSelector("button.fhs-btn-login")).getCssValue("background-color");
+        System.out.println(cssColor);
+        String hexColor = Color.fromString(cssColor).asRgb();
+        System.out.println(hexColor);
+        Assert.assertEquals(hexColor, "rgb(201, 33, 39)");
     }
 
     @AfterClass

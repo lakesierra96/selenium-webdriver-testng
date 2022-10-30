@@ -8,6 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -77,9 +78,6 @@ public class Topic_08_Custom_Dropdown {
 
     @Test
     public void TC_03_JQuery_Drodown_02() {
-        visit("https://react.semantic-ui.com/maximize/dropdown-example-selection/");
-
-        System.out.println("test");
     }
 
     @AfterClass
