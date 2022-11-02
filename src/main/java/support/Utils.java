@@ -182,8 +182,8 @@ public class Utils {
         return getElement(element).isDisplayed();
     }
 
-    public static boolean isSelected(By element) {
-        return getElement(element).isSelected();
+    public static boolean isSelected(WebElement element) {
+        return element.isSelected();
     }
 
     public static boolean isNotDisplayed(By element) {
