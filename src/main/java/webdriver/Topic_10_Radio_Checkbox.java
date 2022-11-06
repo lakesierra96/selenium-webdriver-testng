@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 import static support.Utils.*;
 
-public class Topic_10_Default_Radio_Checkbox {
+public class Topic_10_Radio_Checkbox {
     Random random;
     WebDriverWait wait;
     JavascriptExecutor js;
@@ -38,10 +38,24 @@ public class Topic_10_Default_Radio_Checkbox {
     }
 
     @Test
-    public void TC_01_Handle_Button() {
+    public void TC_01_Default() {
         visit("https://demos.telerik.com/kendo-ui/checkbox");
         checkToCheckBoxOrRadio(getElement(By.xpath("//label[text()='Dual-zone air conditioning']/preceding-sibling::input")));
         Assert.assertTrue(isElementSelected(By.xpath("//label[text()='Dual-zone air conditioning']/preceding-sibling::input")));
+    }
+
+    @Test
+    public void TC_02_Custom() {
+        visit("https://material.angular.io/components/checkbox/examples");
+        /*//dùng span để click và dùng input để verify
+        //disadvantage: Confuse, nhiều code để maintain
+        click(By.xpath("//span[@class='mat-checkbox-inner-container']"));
+        sleepInSecond(2);
+        Assert.assertTrue(isSelected(getElement(By.xpath("//span[text()='Checked']/preceding-sibling::span/input"))));*/
+        js = (JavascriptExecutor) driver;
+        WebElement checkedCheckbox = getElement(By.xpath("//span[text()='Checked']/preceding-sibling::span/input"));
+        js.executeScript("arguments[0].click()", checkedCheckbox);
+        Assert.assertTrue(isSelected(checkedCheckbox));
     }
 
     @AfterClass
@@ -60,7 +74,6 @@ public class Topic_10_Default_Radio_Checkbox {
         if (!element.isSelected() && element.isEnabled()){
             element.click();
             Assert.assertTrue(element.isSelected());
-
         }
     }
 
