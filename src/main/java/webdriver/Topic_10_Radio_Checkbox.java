@@ -64,6 +64,11 @@ public class Topic_10_Radio_Checkbox {
         By hcmRadio = By.xpath("//div[@data-value='Hồ Chí Minh']");
         checkToCheckBoxOrRadio(hcmRadio);
         Assert.assertEquals(getAttribute(hcmRadio, "aria-checked"), "true");
+        By quangnamCheckBox = By.xpath("//div[@aria-label='Quảng Nam']");
+        checkToCheckBoxOrRadio(quangnamCheckBox);
+        Assert.assertEquals(getAttribute(hcmRadio, "aria-checked"), "true");
+        unCheckToCheckBoxOrRadio(quangnamCheckBox);
+        Assert.assertEquals(getAttribute(quangnamCheckBox, "aria-checked"), "false");
     }
 
     @AfterClass
@@ -74,6 +79,13 @@ public class Topic_10_Radio_Checkbox {
     public void checkToCheckBoxOrRadio(By by) {
         WebElement element = getElement(by);
         if (element.getAttribute("aria-checked").equals("false")){
+            element.click();
+        }
+    }
+
+    public void unCheckToCheckBoxOrRadio(By by) {
+        WebElement element = getElement(by);
+        if (element.getAttribute("aria-checked").equals("true")){
             element.click();
         }
     }
