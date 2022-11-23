@@ -62,8 +62,11 @@ public class Topic_10_Radio_Checkbox {
     public void TC_03_Custom() {
         visit("https://docs.google.com/forms/d/e/1FAIpQLSfiypnd69zhuDkjKgqvpID9kwO29UCzeCVrGGtbNPZXQok0jA/viewform");
         By hcmRadio = By.xpath("//div[@data-value='Hồ Chí Minh']");
+        Assert.assertEquals(getAttribute(hcmRadio, "aria-checked"), "false");
+
         checkToCheckBoxOrRadio(hcmRadio);
         Assert.assertEquals(getAttribute(hcmRadio, "aria-checked"), "true");
+
         By quangnamCheckBox = By.xpath("//div[@aria-label='Quảng Nam']");
         checkToCheckBoxOrRadio(quangnamCheckBox);
         Assert.assertEquals(getAttribute(hcmRadio, "aria-checked"), "true");
