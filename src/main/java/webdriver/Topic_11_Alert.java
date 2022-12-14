@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -22,13 +23,12 @@ public class Topic_11_Alert {
     Random random;
     WebDriverWait wait;
     JavascriptExecutor js;
-    Select select;
     Alert alert;
 
     @BeforeClass
     public void beforeClass() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        WebDriverManager.firefoxdriver().setup();
+        driver = new FirefoxDriver();
         random = new Random();
         wait = new WebDriverWait(driver, 30);
 
@@ -44,9 +44,34 @@ public class Topic_11_Alert {
         Assert.assertEquals(getText(By.id("result")), "You clicked an alert successfully");
     }
 
+    @Test
+    public void TC_02_Accept_Confirm() {
+        visit("https://automationfc.github.io/basic-form/index.html");
+        click(By.xpath("//button[text()='Click for JS Confirm']"));
+        alert = driver.switchTo().alert();
+        alert.accept();
+        Assert.assertEquals(getText(By.id("result")), "You clicked: Ok");
+
+        click(By.xpath("//button[text()='Click for JS Confirm']"));
+        alert.dismiss();
+        Assert.assertEquals(getText(By.id("result")), "You clicked: Cancel");
+    }
+
+    @Test
+    public void TC_03_Input_Prompt() {
+        String jsPrompt = "Test";
+        visit("https://automationfc.github.io/basic-form/index.html");
+        click(By.xpath("//button[text()='Click for JS Prompt']"));
+        sleepInSecond(3);
+        alert = driver.switchTo().alert();
+        alert.sendKeys("Test");
+        alert.accept();
+        Assert.assertEquals(getText(By.id("result")), "You entered: Test");
+    }
+
     @AfterClass
     public void tearDown() {
-        driver.quit();
+        //driver.quit();
     }
 
 
