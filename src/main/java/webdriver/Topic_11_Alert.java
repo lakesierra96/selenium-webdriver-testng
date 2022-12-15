@@ -7,6 +7,8 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -63,10 +65,29 @@ public class Topic_11_Alert {
         visit("https://automationfc.github.io/basic-form/index.html");
         click(By.xpath("//button[text()='Click for JS Prompt']"));
         sleepInSecond(3);
-        alert = driver.switchTo().alert();
-        alert.sendKeys("Test");
+
+        //wait and switch then
+        alert = wait.until(ExpectedConditions.alertIsPresent());
+        Assert.assertEquals(alert.getText(), "I am a JS prompt");
+        alert.sendKeys(jsPrompt);
         alert.accept();
-        Assert.assertEquals(getText(By.id("result")), "You entered: Test");
+        Assert.assertEquals(getText(By.id("result")), "You entered: " + jsPrompt);
+    }
+
+    @Test
+    public void TC_04_Authentication_Alert() {
+        /*//C1
+        visit("http://admin:admin@the-internet.herokuapp.com/basic_auth");*/
+
+        visit(byPassAuthentication("http://the-internet.herokuapp.com/basic_auth", "admin", "admin"));
+
+        Assert.assertTrue(isDisplayed(By.xpath("//p[contains(text(), 'Congratulations! You must have the proper credentials.')]")));
+    }
+
+    //C2
+    public String byPassAuthentication(String url, String username, String password) {
+        String[] arrayUrl = url.split("//");
+        return arrayUrl[0] + "//" + username + ":" + password + "@" + arrayUrl[1];
     }
 
     @AfterClass
