@@ -43,6 +43,16 @@ public class Topic_12_Actions {
         Assert.assertTrue(isDisplayed(By.cssSelector("div.ui-tooltip-content")));
     }
 
+    @Test
+    public void TC_02_Hover_Element() {
+        visit("https://www.fahasa.com/");
+        act.moveToElement(getElement(By.cssSelector("span.icon_menu"))).perform();
+        act.moveToElement(getElement(By.xpath("//a[@title='Sách Trong Nước']"))).perform();
+        click(By.linkText("Quản Trị - Lãnh Đạo"));
+        Assert.assertTrue(isDisplayed(By.xpath("//strong[text()='Quản Trị - Lãnh Đạo']")));
+    }
+
+
     @AfterClass
     public void tearDown() {
         //driver.quit();
