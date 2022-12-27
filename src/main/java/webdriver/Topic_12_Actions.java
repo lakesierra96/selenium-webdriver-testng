@@ -4,6 +4,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,6 +14,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -50,6 +52,14 @@ public class Topic_12_Actions {
         act.moveToElement(getElement(By.xpath("//a[@title='Sách Trong Nước']"))).perform();
         click(By.linkText("Quản Trị - Lãnh Đạo"));
         Assert.assertTrue(isDisplayed(By.xpath("//strong[text()='Quản Trị - Lãnh Đạo']")));
+    }
+    @Test
+    public void TC_04_Click_And_Hold() {
+        visit("https://automationfc.github.io/jquery-selectable/");
+        List<WebElement> listNumber = getElements(By.cssSelector("ol#selectable>li"));
+        act.clickAndHold(listNumber.get(0))
+                .moveToElement(listNumber.get(7))
+                .release().perform();
     }
 
 
