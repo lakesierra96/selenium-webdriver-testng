@@ -1,10 +1,7 @@
 package webdriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 import static support.Utils.*;
 
 public class Topic_12_Actions {
+    String osName = System.getProperty("os.name");
     Random random;
     WebDriverWait wait;
     JavascriptExecutor js;
@@ -36,6 +34,7 @@ public class Topic_12_Actions {
 
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
+        System.out.println(osName);
     }
 
     @Test
@@ -53,6 +52,7 @@ public class Topic_12_Actions {
         click(By.linkText("Quản Trị - Lãnh Đạo"));
         Assert.assertTrue(isDisplayed(By.xpath("//strong[text()='Quản Trị - Lãnh Đạo']")));
     }
+
     @Test
     public void TC_04_Click_And_Hold() {
         visit("https://automationfc.github.io/jquery-selectable/");
@@ -62,6 +62,15 @@ public class Topic_12_Actions {
                 .release().perform();
     }
 
+    @Test
+    public void TC_05_Click_And_Select() {
+        visit("https://automationfc.github.io/jquery-selectable/");
+        List<WebElement> listNumber = getElements(By.cssSelector("ol#selectable>li"));
+        act.keyDown(Keys.COMMAND);
+        act.clickAndHold(listNumber.get(0))
+                .moveToElement(listNumber.get(7))
+                .release().perform();
+    }
 
     @AfterClass
     public void tearDown() {
