@@ -66,7 +66,10 @@ public class Topic_12_Actions {
     public void TC_05_Click_And_Select() {
         visit("https://automationfc.github.io/jquery-selectable/");
         List<WebElement> listNumber = getElements(By.cssSelector("ol#selectable>li"));
-        act.keyDown(Keys.COMMAND);
+
+        if(osName.equals("Mac")) {
+            act.keyDown(Keys.COMMAND);
+        }
         act.clickAndHold(listNumber.get(0))
                 .moveToElement(listNumber.get(7))
                 .release().perform();
