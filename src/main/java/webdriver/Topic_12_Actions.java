@@ -2,6 +2,7 @@ package webdriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -26,8 +27,8 @@ public class Topic_12_Actions {
 
     @BeforeClass
     public void beforeClass() {
-        WebDriverManager.firefoxdriver().setup();
-        driver = new FirefoxDriver();
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
         random = new Random();
         wait = new WebDriverWait(driver, 30);
         act = new Actions(driver);
@@ -65,14 +66,21 @@ public class Topic_12_Actions {
     @Test
     public void TC_05_Click_And_Select() {
         visit("https://automationfc.github.io/jquery-selectable/");
+        Keys key = null;
+
+        if(osName.equals("Windows")) {
+            key = Keys.CONTROL;
+        }else {
+            key = Keys.COMMAND;
+        }
+
         List<WebElement> listNumber = getElements(By.cssSelector("ol#selectable>li"));
 
-        if(osName.equals("Mac")) {
-            act.keyDown(Keys.COMMAND);
-        }
-        act.clickAndHold(listNumber.get(0))
-                .moveToElement(listNumber.get(7))
-                .release().perform();
+        act.keyDown(key).click(listNumber.get(0))
+                        .click(listNumber.get(2))
+                        .click(listNumber.get(4))
+                                .perform();
+        act.release().perform();
     }
 
     @AfterClass
