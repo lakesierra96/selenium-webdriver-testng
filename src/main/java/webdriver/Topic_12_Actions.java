@@ -1,11 +1,12 @@
 package webdriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -68,19 +69,22 @@ public class Topic_12_Actions {
         visit("https://automationfc.github.io/jquery-selectable/");
         Keys key = null;
 
-        if(osName.equals("Windows")) {
+        if (osName.equals("Windows")) {
             key = Keys.CONTROL;
-        }else {
+        } else {
             key = Keys.COMMAND;
         }
 
         List<WebElement> listNumber = getElements(By.cssSelector("ol#selectable>li"));
 
         act.keyDown(key).click(listNumber.get(0))
-                        .click(listNumber.get(2))
-                        .click(listNumber.get(4))
-                                .perform();
-        act.release().perform();
+                .click(listNumber.get(2))
+                .click(listNumber.get(4))
+                .perform();
+        act.keyUp(key).perform();
+
+        List<WebElement> listSelectedNumber = getElements(By.cssSelector("li.ui-selected"));
+        Assert.assertEquals(listSelectedNumber.size(), 3);
     }
 
     @AfterClass
