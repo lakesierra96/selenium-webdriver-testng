@@ -53,7 +53,6 @@ public class Topic_11_Alert {
         alert = driver.switchTo().alert();
         alert.accept();
         Assert.assertEquals(getText(By.id("result")), "You clicked: Ok");
-
         click(By.xpath("//button[text()='Click for JS Confirm']"));
         alert.dismiss();
         Assert.assertEquals(getText(By.id("result")), "You clicked: Cancel");
