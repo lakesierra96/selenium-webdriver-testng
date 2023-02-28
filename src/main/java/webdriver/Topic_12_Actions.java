@@ -7,6 +7,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -85,6 +86,22 @@ public class Topic_12_Actions {
 
         List<WebElement> listSelectedNumber = getElements(By.cssSelector("li.ui-selected"));
         Assert.assertEquals(listSelectedNumber.size(), 3);
+    }
+
+    @Test
+    public void TC_06_Drag_And_Drop() {
+        visit("https://automationfc.github.io/kendo-drag-drop/");
+        WebElement dragElement = getElement(By.id("draggable"));
+        WebElement dropTarget = getElement(By.id("droptarget"));
+
+        act.dragAndDrop(dragElement, dropTarget).perform();
+
+        String targetColorRGB = dropTarget.getCssValue("background-color");
+        System.out.println(targetColorRGB);
+
+        String targetBackgroundHexColor = Color.fromString(targetColorRGB).asHex();
+        System.out.println(targetBackgroundHexColor);
+        Assert.assertEquals(targetBackgroundHexColor, "#03a9f4");
     }
 
     @AfterClass
