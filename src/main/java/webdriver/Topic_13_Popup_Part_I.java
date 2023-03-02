@@ -49,6 +49,12 @@ public class Topic_13_Popup_Part_I {
         click(By.cssSelector("div.modal.fade.in button.btn-login-v1"));
     }
 
+    @Test
+    public void TC_01_Fixed_Popup_Kyna() {
+        visit("https://skills.kynaenglish.vn/");
+
+    }
+
     @AfterClass
     public void tearDown() {
         //driver.quit();
