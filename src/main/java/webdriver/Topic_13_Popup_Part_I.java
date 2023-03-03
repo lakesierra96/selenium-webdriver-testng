@@ -64,6 +64,14 @@ public class Topic_13_Popup_Part_I {
         Assert.assertEquals(getText(By.id("password-form-login-message")), "Sai tên đăng nhập hoặc mật khẩu");
     }
 
+
+    @Test
+    public void TC_03_Fixed_Popup_Tiki() {
+        visit("https://tiki.vn/");
+        click(By.xpath("//div[@data-view-id='header_header_account_container']"));
+        Assert.assertTrue(isDisplayed(By.cssSelector("div.styles__Root-sc-2hr4xa-0")));
+    }
+
     @AfterClass
     public void tearDown() {
         //driver.quit();
