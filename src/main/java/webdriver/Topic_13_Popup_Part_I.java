@@ -66,10 +66,16 @@ public class Topic_13_Popup_Part_I {
 
 
     @Test
-    public void TC_03_Fixed_Popup_Tiki() {
+    public void TC_03_Fixed_Not_In_Dom_Tiki() {
         visit("https://tiki.vn/");
         click(By.xpath("//div[@data-view-id='header_header_account_container']"));
-        Assert.assertTrue(isDisplayed(By.cssSelector("div.styles__Root-sc-2hr4xa-0")));
+        By loginPopup = By.cssSelector("div.ReactModal__Overlay"); //lý do dùng findElement là vì ko trong Dom khi close popup nên ko find dc element
+        Assert.assertTrue(isDisplayed(loginPopup));
+        click(By.cssSelector("p.login-with-email"));
+        click(By.xpath("//button[text()='Đăng nhập']"));
+        isDisplayed(By.xpath("//span[@class='error-mess' and text()='Email không được để trống']"));
+        isDisplayed(By.xpath("//span[@class='error-mess' and text()='Mật khẩu không được để trống']"));
+
     }
 
     @AfterClass
