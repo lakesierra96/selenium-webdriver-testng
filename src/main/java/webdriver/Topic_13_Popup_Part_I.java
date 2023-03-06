@@ -33,7 +33,7 @@ public class Topic_13_Popup_Part_I {
         wait = new WebDriverWait(driver, 30);
         act = new Actions(driver);
 
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
 
@@ -42,7 +42,6 @@ public class Topic_13_Popup_Part_I {
         visit("https://ngoaingu24h.vn/");
         By loginPopup = By.cssSelector("div.modal.fade.in div.modal-content");
         click(By.cssSelector("button.login_"));
-        Assert.assertTrue(isDisplayed(loginPopup));
 
         sendKey(By.id("account-input"), "automationfc");
         sendKey(By.id("password-input"), "automationfc");
@@ -64,18 +63,28 @@ public class Topic_13_Popup_Part_I {
         Assert.assertEquals(getText(By.id("password-form-login-message")), "Sai tên đăng nhập hoặc mật khẩu");
     }
 
-
     @Test
     public void TC_03_Fixed_Not_In_Dom_Tiki() {
         visit("https://tiki.vn/");
-        click(By.xpath("//div[@data-view-id='header_header_account_container']"));
         By loginPopup = By.cssSelector("div.ReactModal__Overlay"); //lý do dùng findElement là vì ko trong Dom khi close popup nên ko find dc element
+
+        //Verify popup chưa hiển thị
+        Assert.assertEquals(getElements(loginPopup).size(), 0);
+
+        click(By.xpath("//div[@data-view-id='header_header_account_container']"));
+
+        //Verify pop-up đã hiển thị
+        Assert.assertEquals(getElements(loginPopup).size(), 1);
+        Assert.assertTrue(isDisplayed(loginPopup));
+
         Assert.assertTrue(isDisplayed(loginPopup));
         click(By.cssSelector("p.login-with-email"));
         click(By.xpath("//button[text()='Đăng nhập']"));
         isDisplayed(By.xpath("//span[@class='error-mess' and text()='Email không được để trống']"));
         isDisplayed(By.xpath("//span[@class='error-mess' and text()='Mật khẩu không được để trống']"));
 
+        click(By.cssSelector("img.close-img"));
+        Assert.assertEquals(getElements(loginPopup).size(), 0);
     }
 
     @AfterClass
