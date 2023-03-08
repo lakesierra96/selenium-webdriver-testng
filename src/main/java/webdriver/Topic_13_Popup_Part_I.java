@@ -2,18 +2,16 @@ package webdriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import static support.Utils.*;
@@ -30,10 +28,10 @@ public class Topic_13_Popup_Part_I {
         options.addArguments("--disable-notifications");
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver, 30);
+        wait = new WebDriverWait(driver, 5);
         act = new Actions(driver);
 
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
 
@@ -85,6 +83,26 @@ public class Topic_13_Popup_Part_I {
 
         click(By.cssSelector("img.close-img"));
         Assert.assertEquals(getElements(loginPopup).size(), 0);
+    }
+
+    @Test
+    public void TC_04_Fixed_Not_In_Dom_Facebook() {
+        visit("https://www.facebook.com");
+        By createAccountPopup = By.xpath("//div[text()='Sign Up']/parent::div/parent::div");
+        Assert.assertEquals(getElements(createAccountPopup).size(), 0);
+
+        click(By.xpath("//a[text()='Create new account']"));
+
+        Assert.assertEquals(getElements(createAccountPopup).size(), 1);
+
+        new Select(getElement(By.id("day"))).selectByVisibleText("17");
+        new Select(getElement(By.id("month"))).selectByVisibleText("Aug");
+        new Select(getElement(By.id("year"))).selectByVisibleText("1996");
+        click(By.xpath("//label[text()='Male']"));
+        click(By.xpath("//div[text()='Sign Up']/parent::div/preceding-sibling::img"));
+        sleepInSecond(2);
+
+        Assert.assertEquals(getElements(createAccountPopup).size(), 0);
     }
 
     @AfterClass
