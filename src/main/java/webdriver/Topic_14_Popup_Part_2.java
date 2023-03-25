@@ -28,10 +28,10 @@ public class Topic_14_Popup_Part_2 {
         options.addArguments("--disable-notifications");
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver, 5);
+        wait = new WebDriverWait(driver, 10);
         act = new Actions(driver);
 
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
 
@@ -40,7 +40,13 @@ public class Topic_14_Popup_Part_2 {
         visit("https://www.javacodegeeks.com/");
 
         By lePopup = By.cssSelector("div.lepopup-popup-container>div:not([style^='display:none'])");
+        waitForElementPresent(lePopup);
         Assert.assertTrue(isDisplayed(lePopup));
+
+        sendKey(By.cssSelector("div.lepopup-input>input"), "lakesierra96@gmail.com");
+        click(By.cssSelector("a.lepopup-button"));
+
+
     }
 
     @AfterClass
