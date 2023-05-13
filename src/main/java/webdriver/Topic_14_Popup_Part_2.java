@@ -12,21 +12,22 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import static support.Utils.*;
 
 public class Topic_14_Popup_Part_2 {
-    String osName = System.getProperty("os.name");
     WebDriverWait wait;
     Actions act;
+    String emailAddress = "test" + getRandomNumber() + "@gmail.com";
 
     @BeforeClass
     public void beforeClass() {
         //Disable chrome notification
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
-        WebDriverManager.chromedriver().setup();
+        WebDriverManager.chromedriver().setup(); 
         driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, 5);
         act = new Actions(driver);
@@ -36,10 +37,15 @@ public class Topic_14_Popup_Part_2 {
     }
 
     @Test
-    public void TC_01_Fixed_Popup_NgoaiNgu() {
+    public void TC_01_Random_In_Dom() {
         visit("https://www.javacodegeeks.com/");
-
         By lePopup = By.cssSelector("div.lepopup-popup-container>div:not([style^='display:none'])");
+
+        sleepInSecond(45);
+        //vì luôn có trong dom nên có thể dùng isDisplay() để ktra
+        if(isDisplayed(lePopup)) {
+            sendKey(By.cssSelector("div.lepopup-input>input"), emailAddress);
+        }
         Assert.assertTrue(isDisplayed(lePopup));
     }
 
@@ -51,6 +57,10 @@ public class Topic_14_Popup_Part_2 {
 
     public boolean isElementSelected(By by) {
         return getElement(by).isSelected();
+    }
+
+    public int getRandomNumber() {
+        return new Random().nextInt(99999);
     }
 
     public void sleepInSecond(long miliSecond) {
