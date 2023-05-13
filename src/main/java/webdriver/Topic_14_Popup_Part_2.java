@@ -27,7 +27,7 @@ public class Topic_14_Popup_Part_2 {
         //Disable chrome notification
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
-        WebDriverManager.chromedriver().setup(); 
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, 5);
         act = new Actions(driver);
@@ -41,10 +41,11 @@ public class Topic_14_Popup_Part_2 {
         visit("https://www.javacodegeeks.com/");
         By lePopup = By.cssSelector("div.lepopup-popup-container>div:not([style^='display:none'])");
 
-        sleepInSecond(45);
+        sleepInSecond(30);
         //vì luôn có trong dom nên có thể dùng isDisplay() để ktra
         if(isDisplayed(lePopup)) {
             sendKey(By.cssSelector("div.lepopup-input>input"), emailAddress);
+            click(By.cssSelector("a.lepopup-button"));
         }
         Assert.assertTrue(isDisplayed(lePopup));
     }
