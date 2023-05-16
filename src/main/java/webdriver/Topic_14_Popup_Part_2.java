@@ -48,6 +48,14 @@ public class Topic_14_Popup_Part_2 {
             click(By.cssSelector("a.lepopup-button"));
         }
         Assert.assertTrue(isDisplayed(lePopup));
+        Assert.assertEquals(getText(By.cssSelector("div.lepopup-element-html-content>h4")), "Thank you!");
+        //có thể dùng contains để trích ra 1 đoạn text
+        Assert.assertTrue(getText(By.cssSelector("div.lepopup-element-html-content>p")).contains("Your sign-up request was successful. We will contact you shortly"));
+        sleepInSecond(10);
+
+        String articlename = "agile testing explained";
+        sendKey(By.id("search-input"), articlename);
+        click(By.id("search-submit"));
     }
 
     @AfterClass
