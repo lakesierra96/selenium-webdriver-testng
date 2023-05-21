@@ -53,9 +53,11 @@ public class Topic_14_Popup_Part_2 {
         Assert.assertTrue(getText(By.cssSelector("div.lepopup-element-html-content>p")).contains("Your sign-up request was successful. We will contact you shortly"));
         sleepInSecond(10);
 
-        String articlename = "agile testing explained";
+        String articlename = "Agile Testing Explained";
         sendKey(By.id("search-input"), articlename);
         click(By.id("search-submit"));
+
+        Assert.assertEquals(getText(By.cssSelector("ul#posts-container>li:first-child h2")), articlename);
     }
 
     @AfterClass
