@@ -32,7 +32,7 @@ public class Topic_14_Popup_Part_2 {
         wait = new WebDriverWait(driver, 5);
         act = new Actions(driver);
 
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
 
