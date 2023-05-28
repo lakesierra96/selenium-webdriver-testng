@@ -43,6 +43,7 @@ public class Topic_14_Popup_Part_2 {
 
         sleepInSecond(30);
         //vì luôn có trong dom nên có thể dùng isDisplay() để ktra
+        //isDisplay chỉ dùng để check element có trong dom. Ko có trong dom thì fail từ findElement
         if(isDisplayed(lePopup)) {
             sendKey(By.cssSelector("div.lepopup-input>input"), emailAddress);
             click(By.cssSelector("a.lepopup-button"));
@@ -58,6 +59,29 @@ public class Topic_14_Popup_Part_2 {
         click(By.id("search-submit"));
 
         Assert.assertEquals(getText(By.cssSelector("ul#posts-container>li:first-child h2")), articlename);
+    }
+
+    @Test
+    public void TC_02_Random_Not_In_Dom() {
+        visit("https://dehieu.vn/");
+        waitForElementPresent(By.cssSelector("div.popup-content"));
+        By popup = By.cssSelector("div.popup-content");
+
+        //findElement => fail khi ko tìm thấy element => ném ra lỗi
+        //findElements => ko fail khi ko thấy element => trả về 1 list rỗng
+        if (getElements(popup).size() > 0 && getElements(popup).get(0).isDisplayed()) {
+            sendKey(By.name("name"), "Hieu");
+            click(By.id("close-popup"));
+        }
+
+        String courseName = "Khóa học Thiết kế và Thi công Hệ thống BMS";
+        click(By.linkText("Tất cả khóa học"));
+        sendKey(By.id("search-courses"), courseName);
+        click(By.id("search-course-button"));
+
+        //ktra chỉ có 1 course hiển thị mathc với input
+        Assert.assertEquals(getElements(By.cssSelector("div.course")).size(), 1);
+        Assert.assertEquals(getText(By.cssSelector("div.course-content>h4")), courseName);
     }
 
     @AfterClass
