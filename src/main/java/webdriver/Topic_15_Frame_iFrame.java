@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -47,6 +48,17 @@ public class Topic_15_Frame_iFrame {
         System.out.println(followers);
 
         Assert.assertEquals(followers, "165K followers");
+
+        driver.switchTo().defaultContent();
+
+        driver.switchTo().frame(getElement(By.id("cs_chat_iframe")));
+        click(By.cssSelector("div.border_overlay"));
+        sendKey(By.cssSelector("input.input_name"), "Hieu");
+        sendKey(By.cssSelector("input.input_phone"), "03254646453");
+
+        //cách để khai báo hàm select nhanh khi mà chỉ cần dùng select 1 lần (nên khai báo biến khi xài cho nhiều lần)
+        new Select(getElement(By.name("serviceSelect"))).selectByVisibleText("HỖ TRỢ KỸ THUẬT");
+        sendKey(By.name("message"), "test");
     }
 
     @AfterClass
