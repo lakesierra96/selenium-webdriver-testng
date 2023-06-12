@@ -2,6 +2,7 @@ package webdriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
@@ -20,6 +21,7 @@ import static support.Utils.*;
 public class Topic_15_Frame_iFrame {
     WebDriverWait wait;
     Actions act;
+    JavascriptExecutor js;
     String emailAddress = "test" + getRandomNumber() + "@gmail.com";
 
     @BeforeClass
@@ -52,12 +54,16 @@ public class Topic_15_Frame_iFrame {
         driver.switchTo().defaultContent();
 
         driver.switchTo().frame(getElement(By.id("cs_chat_iframe")));
-        click(By.cssSelector("div.border_overlay"));
+        sleepInSecond(2);
+
+        js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", getElement(By.cssSelector("div.border_overlay")));
+
         sendKey(By.cssSelector("input.input_name"), "Hieu");
         sendKey(By.cssSelector("input.input_phone"), "03254646453");
 
         //cách để khai báo hàm select nhanh khi mà chỉ cần dùng select 1 lần (nên khai báo biến khi xài cho nhiều lần)
-        new Select(getElement(By.name("serviceSelect"))).selectByVisibleText("HỖ TRỢ KỸ THUẬT");
+        new Select(getElement(By.id("serviceSelect"))).selectByVisibleText("HỖ TRỢ KỸ THUẬT");
         sendKey(By.name("message"), "test");
     }
 
