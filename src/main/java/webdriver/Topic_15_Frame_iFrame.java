@@ -58,6 +58,7 @@ public class Topic_15_Frame_iFrame {
         driver.switchTo().frame(getElement(By.id("cs_chat_iframe")));
         sleepInSecond(2);
 
+        //khi ko dùng đc web element để click thì dùng js
         js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", getElement(By.cssSelector("div.border_overlay")));
 
