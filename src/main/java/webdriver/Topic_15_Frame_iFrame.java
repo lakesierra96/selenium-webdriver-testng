@@ -81,6 +81,19 @@ public class Topic_15_Frame_iFrame {
         }
     }
 
+    @Test
+    public void TC_02_Frame() {
+        visit("https://netbanking.hdfcbank.com/netbanking/");
+
+        driver.switchTo().frame("login_page");
+        sendKey(By.name("fldLoginUserId"), "Automation");
+        click(By.linkText("CONTINUE"));
+        sleepInSecond(1);
+
+        driver.switchTo().defaultContent();
+        Assert.assertTrue(isDisplayed(By.id("keyboard")));
+    }
+
     @AfterClass
     public void tearDown() {
         //driver.quit();
