@@ -74,7 +74,7 @@ public class Topic_15_Frame_iFrame {
         sendKey(By.id("live-search-bar"), keyword);
         click(By.cssSelector("button.search-button"));
 
-        List <WebElement> courseName = getElements(By.cssSelector("div.content>h4"));
+        List<WebElement> courseName = getElements(By.cssSelector("div.content>h4"));
         for (WebElement course : courseName) {
             System.out.println(course.getText());
             Assert.assertTrue(course.getText().contains(keyword));
