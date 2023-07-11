@@ -64,7 +64,7 @@ public class Topic_13_Popup_Part_I {
     @Test
     public void TC_03_Fixed_Not_In_Dom_Tiki() {
         visit("https://tiki.vn/");
-        By loginPopup = By.cssSelector("div.ReactModal__Overlay"); //lý do dùng findElement là vì ko trong Dom khi close popup nên ko find dc element
+        By loginPopup = By.cssSelector("div.ReactModal__Overlay"); //lý do dùng findElements là vì ko trong Dom khi close popup nên ko find dc element
 
         //Verify popup chưa hiển thị
         Assert.assertEquals(getElements(loginPopup).size(), 0);
