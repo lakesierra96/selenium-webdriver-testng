@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import static support.Utils.*;
@@ -100,6 +101,13 @@ public class Topic_15_Frame_iFrame {
         //driver.quit();
     }
 
+    public void switchToWindowByTitle(String pageTitle) {
+        Set<String> allIDs = driver.getWindowHandles();
+
+        for (String pageID:allIDs) {
+
+        }
+    }
 
     public boolean isElementSelected(By by) {
         return getElement(by).isSelected();
