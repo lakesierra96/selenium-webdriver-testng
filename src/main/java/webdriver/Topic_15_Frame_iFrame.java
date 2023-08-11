@@ -104,8 +104,12 @@ public class Topic_15_Frame_iFrame {
     public void switchToWindowByTitle(String pageTitle) {
         Set<String> allIDs = driver.getWindowHandles();
 
-        for (String pageID:allIDs) {
-
+        for (String id : allIDs) {
+            driver.switchTo().frame(id);
+            String actualPageTitle = driver.getTitle();
+            if (actualPageTitle.equals(pageTitle)) {
+                break;
+            }
         }
     }
 
