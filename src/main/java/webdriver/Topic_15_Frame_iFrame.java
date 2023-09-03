@@ -33,7 +33,7 @@ public class Topic_15_Frame_iFrame {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver(options);
+        driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 5);
         act = new Actions(driver);
 
@@ -99,18 +99,6 @@ public class Topic_15_Frame_iFrame {
     @AfterClass
     public void tearDown() {
         //driver.quit();
-    }
-
-    public void switchToWindowByTitle(String pageTitle) {
-        Set<String> allIDs = driver.getWindowHandles();
-
-        for (String id : allIDs) {
-            driver.switchTo().frame(id);
-            String actualPageTitle = driver.getTitle();
-            if (actualPageTitle.equals(pageTitle)) {
-                break;
-            }
-        }
     }
 
     public boolean isElementSelected(By by) {
