@@ -24,8 +24,6 @@ import static support.Utils.*;
 public class Topic_16_Windows_Tab {
     WebDriverWait wait;
     Actions act;
-    JavascriptExecutor js;
-    String emailAddress = "test" + getRandomNumber() + "@gmail.com";
 
     @BeforeClass
     public void beforeClass() {
@@ -44,7 +42,7 @@ public class Topic_16_Windows_Tab {
     @Test
     public void TC_02_Github_Greater_Two_Tabs() {
         visit("https://automationfc.github.io/basic-form/index.html");
-
+        String parentID = driver.getWindowHandle();
         click(By.linkText("GOOGLE"));
         switchToWindowByTitle("Google");
 
@@ -55,6 +53,8 @@ public class Topic_16_Windows_Tab {
         switchToWindowByTitle("Facebook - Log in or sign up");
         System.out.println("Page Title = " + driver.getTitle());
         switchToWindowByTitle("Selenium WebDriver");
+        closeAllWindowsExceptParentID(parentID);
+
     }
 
     @AfterClass
@@ -70,6 +70,17 @@ public class Topic_16_Windows_Tab {
             String actualPageTitle = driver.getTitle();
             if (actualPageTitle.equals(pageTitle)) {
                 break;
+            }
+        }
+    }
+
+    public void closeAllWindowsExceptParentID(String parentID) {
+        Set<String> allIDs = driver.getWindowHandles();
+
+        for (String id : allIDs) {
+            driver.switchTo().window(id);
+            if (!id.equals(parentID)){
+                driver.close();
             }
         }
     }
