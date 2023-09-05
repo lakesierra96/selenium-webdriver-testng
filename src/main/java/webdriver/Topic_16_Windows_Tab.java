@@ -54,7 +54,17 @@ public class Topic_16_Windows_Tab {
         System.out.println("Page Title = " + driver.getTitle());
         switchToWindowByTitle("Selenium WebDriver");
         closeAllWindowsExceptParentID(parentID);
+    }
 
+    @Test
+    public void TC_03_Greater_Two_Tabs() {
+        visit("http://live.techpanda.org/");
+        click(By.xpath("//a[text()='Mobile']"));
+        click(By.xpath("//a[@title='Sony Xperia']/parent::h2/following-sibling::div/button/following-sibling::ul//li/a[text()='Add to Compare']"));
+        Assert.assertTrue(isDisplayed(By.xpath("//span[text()='The product Sony Xperia has been added to comparison list.']")));
+
+        click(By.xpath("//a[@title='Samsung Galaxy']/parent::h2/following-sibling::div/button/following-sibling::ul//li/a[text()='Add to Compare']"));
+        Assert.assertTrue(isDisplayed(By.xpath("//span[text()='The product Samsung Galaxy has been added to comparison list.']")));
     }
 
     @AfterClass
