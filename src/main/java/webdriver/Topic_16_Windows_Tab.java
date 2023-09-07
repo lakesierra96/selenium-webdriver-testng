@@ -71,6 +71,10 @@ public class Topic_16_Windows_Tab {
         switchToWindowByTitle("Products Comparison List - Magento Commerce");
         Assert.assertEquals(driver.getTitle(), "Products Comparison List - Magento Commerce");
         closeAllWindowsExceptParentID(parentID);
+        driver.switchTo().window(parentID);
+        click(By.linkText("Clear All"));
+        driver.switchTo().alert().accept();
+        Assert.assertTrue(isDisplayed(By.xpath("//span[text()='The comparison list was cleared.']")));
     }
 
     @AfterClass

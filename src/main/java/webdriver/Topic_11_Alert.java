@@ -29,8 +29,8 @@ public class Topic_11_Alert {
 
     @BeforeClass
     public void beforeClass() {
-        WebDriverManager.firefoxdriver().setup();
-        driver = new FirefoxDriver();
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
         random = new Random();
         wait = new WebDriverWait(driver, 30);
 
