@@ -61,10 +61,10 @@ public class Topic_16_Windows_Tab {
         visit("http://live.techpanda.org/");
         String parentID = driver.getWindowHandle();
         click(By.xpath("//a[text()='Mobile']"));
-        click(By.xpath("//a[@title='Sony Xperia']/parent::h2/following-sibling::div/button/following-sibling::ul//li/a[text()='Add to Compare']"));
+        click(By.xpath("//a[@title='Sony Xperia']/parent::h2/following-sibling::div//a[text()='Add to Compare']"));
         Assert.assertTrue(isDisplayed(By.xpath("//span[text()='The product Sony Xperia has been added to comparison list.']")));
 
-        click(By.xpath("//a[@title='Samsung Galaxy']/parent::h2/following-sibling::div/button/following-sibling::ul//li/a[text()='Add to Compare']"));
+        click(By.xpath("//a[@title='Samsung Galaxy']/parent::h2/following-sibling::div//a[text()='Add to Compare']"));
         Assert.assertTrue(isDisplayed(By.xpath("//span[text()='The product Samsung Galaxy has been added to comparison list.']")));
 
         click(By.xpath("//button[@title='Compare']"));
