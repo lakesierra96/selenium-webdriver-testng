@@ -43,7 +43,7 @@ public class Topic_17_Javascript_Executor {
     }
 
     @Test
-    public void TC_02_Github_Greater_Two_Tabs() {
+    public void TC_01_Javascript_Executor() {
         String email = "test" + getRandomNumber() + "@gmail.com";
 
         navigateToUrlByJS("http://live.techpanda.org/");
@@ -72,6 +72,11 @@ public class Topic_17_Javascript_Executor {
         Assert.assertTrue(areExpectedTextInInnerText("Thank you for your subscription."));
     }
 
+    @Test
+    public void TC_02_Verify_Html5_Validation_Message() {
+        navigateToUrlByJS("https://warranty.rode.com/");
+        clickToElementByJS("//input[@name='submit-btn']");
+    }
     @AfterClass
     public void tearDown() {
         //driver.quit();
