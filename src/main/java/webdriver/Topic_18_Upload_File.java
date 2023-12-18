@@ -8,11 +8,13 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -22,8 +24,8 @@ public class Topic_18_Upload_File {
     WebDriverWait wait;
     String projectPath = System.getProperty("user.dir");
 
-    String firstImg = "IMG_0580.JPG";
-    String secondImg = "S__3547139.jpg";
+    String firstImg = "FirstIMG.JPG";
+    String secondImg = "SecondIMG.jpg";
 
     String firstImgPath = projectPath + File.separator + "uploadFiles" + File.separator + firstImg;
     String secondImgPath = projectPath + File.separator + "uploadFiles" + File.separator + secondImg;
@@ -45,8 +47,21 @@ public class Topic_18_Upload_File {
     @Test
     public void TC_01_One_File_Per_Time() {
         visit("https://blueimp.github.io/jQuery-File-Upload/");
-        driver.findElement(By.xpath("//input[@type='file']")).sendKeys(firstImgPath);
-        driver.findElement(By.xpath("//input[@type='file']")).sendKeys(secondImgPath);
+
+        By uploadFile = By.xpath("//input[@type='file']");
+        driver.findElement(uploadFile).sendKeys(firstImgPath);
+        driver.findElement(uploadFile).sendKeys(secondImgPath);
+
+        Assert.assertTrue(isDisplayed(By.xpath("//p[@class='name' and text()='" + firstImg + "']")));
+        Assert.assertTrue(isDisplayed(By.xpath("//p[@class='name' and text()='" + secondImg + "']")));
+
+        List<WebElement> startButtons = getElements(By.cssSelector("td button.start"));
+        for (WebElement start : startButtons) {
+            start.click();
+            sleepInSecond(2);
+        }
+        Assert.assertTrue(isDisplayed(By.xpath("//a[@title='" + firstImg + "']")));
+        Assert.assertTrue(isDisplayed(By.xpath("//a[@title='" + secondImg + "']")));
     }
 
     @Test
