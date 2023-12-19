@@ -1,5 +1,6 @@
 package webdriver;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -22,6 +23,7 @@ import static support.Utils.*;
 
 public class Topic_18_Upload_File {
     WebDriverWait wait;
+    JavascriptExecutor jsExecutor;
     String projectPath = System.getProperty("user.dir");
 
     String firstImg = "FirstIMG.JPG";
@@ -38,6 +40,7 @@ public class Topic_18_Upload_File {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 5);
+        jsExecutor = (JavascriptExecutor) driver;
 
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
@@ -60,8 +63,13 @@ public class Topic_18_Upload_File {
             start.click();
             sleepInSecond(2);
         }
+
         Assert.assertTrue(isDisplayed(By.xpath("//a[@title='" + firstImg + "']")));
         Assert.assertTrue(isDisplayed(By.xpath("//a[@title='" + secondImg + "']")));
+
+        //Verify cac hinh nay upload len la hinh thuc bang js
+        Assert.assertTrue(isImageLoaded("//a[@title='" + firstImg + "']/img"));
+        Assert.assertTrue(isImageLoaded("//a[@title='" + secondImg + "']/img"));
     }
 
     @Test
@@ -77,6 +85,12 @@ public class Topic_18_Upload_File {
 
     public WebElement getElement(String locator) {
         return driver.findElement(By.xpath(locator));
+    }
+
+    public boolean isImageLoaded(String locator) {
+        boolean status = (boolean) jsExecutor.executeScript(
+                "return arguments[0].complete && typeof arguments[0].naturalWidth != 'undefined' && arguments[0].naturalWidth > 0", getElement(locator));
+        return status;
     }
 
     public int getRandomNumber() {

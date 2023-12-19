@@ -38,6 +38,8 @@ public class Topic_17_Javascript_Executor {
         act = new Actions(driver);
 
         jsExecutor = (JavascriptExecutor) driver;
+        //phải nằm dưới driver = new Chrome vì nằm trên sẽ lỗi do driver chưa đc sinh ra
+
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
