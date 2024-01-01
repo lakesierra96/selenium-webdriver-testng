@@ -74,7 +74,10 @@ public class Topic_18_Upload_File {
 
     @Test
     public void TC_02_Multiple_Files_Per_Time() {
+        visit("https://blueimp.github.io/jQuery-File-Upload/");
 
+        By uploadFile = By.xpath("//input[@type='file']");
+        driver.findElement(uploadFile).sendKeys(firstImgPath + "\n" + secondImgPath);
     }
 
     @AfterClass
