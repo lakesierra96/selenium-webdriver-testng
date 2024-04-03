@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Utils {
     private static WebDriverWait wait;
-    public static WebDriver driver;
+    public static WebDriver driver = new ChromeDriver();
     private static JavascriptExecutor js;
 
     public static void openBrowser() {

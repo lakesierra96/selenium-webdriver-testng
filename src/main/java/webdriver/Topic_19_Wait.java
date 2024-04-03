@@ -3,6 +3,7 @@ package webdriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -24,58 +25,27 @@ public class Topic_19_Wait {
     JavascriptExecutor jsExecutor;
     String projectPath = System.getProperty("user.dir");
 
-    String firstImg = "FirstIMG.JPG";
-    String secondImg = "SecondIMG.jpg";
-
-    String firstImgPath = projectPath + File.separator + "uploadFiles" + File.separator + firstImg;
-    String secondImgPath = projectPath + File.separator + "uploadFiles" + File.separator + secondImg;
 
     @BeforeClass
     public void beforeClass() {
         //Disable chrome notification
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications");
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        wait = new WebDriverWait(driver, 5);
+        System.setProperty("webdriver.chrome.driver", projectPath + "/drivers/chromedriver");
+        WebDriver driver = new ChromeDriver();
+        wait = new WebDriverWait(driver, 30);
         jsExecutor = (JavascriptExecutor) driver;
 
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
 
     @Test
-    public void TC_01_One_File_Per_Time() {
-        visit("https://blueimp.github.io/jQuery-File-Upload/");
+    public void TC_01_Visible_Display() {
+        visit("https://www.facebook.com");
 
-        By uploadFile = By.xpath("//input[@type='file']");
-        driver.findElement(uploadFile).sendKeys(firstImgPath);
-        driver.findElement(uploadFile).sendKeys(secondImgPath);
-
-        Assert.assertTrue(isDisplayed(By.xpath("//p[@class='name' and text()='" + firstImg + "']")));
-        Assert.assertTrue(isDisplayed(By.xpath("//p[@class='name' and text()='" + secondImg + "']")));
-
-        List<WebElement> startButtons = getElements(By.cssSelector("td button.start"));
-        for (WebElement start : startButtons) {
-            start.click();
-            sleepInSecond(2);
-        }
-
-        Assert.assertTrue(isDisplayed(By.xpath("//a[@title='" + firstImg + "']")));
-        Assert.assertTrue(isDisplayed(By.xpath("//a[@title='" + secondImg + "']")));
-
-        //Verify cac hinh nay upload len la hinh thuc bang js
-        Assert.assertTrue(isImageLoaded("//a[@title='" + firstImg + "']/img"));
-        Assert.assertTrue(isImageLoaded("//a[@title='" + secondImg + "']/img"));
     }
 
     @Test
     public void TC_02_Multiple_Files_Per_Time() {
-        visit("https://blueimp.github.io/jQuery-File-Upload/");
-
-        By uploadFile = By.xpath("//input[@type='file']");
-        driver.findElement(uploadFile).sendKeys(firstImgPath + "\n" + secondImgPath);
     }
 
     @AfterClass

@@ -38,7 +38,7 @@ public class Topic_18_Upload_File {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
         WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, 5);
         jsExecutor = (JavascriptExecutor) driver;
 
