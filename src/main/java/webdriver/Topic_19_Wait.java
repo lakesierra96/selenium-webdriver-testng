@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -21,31 +22,66 @@ import java.util.concurrent.TimeUnit;
 import static support.Utils.*;
 
 public class Topic_19_Wait {
-    WebDriverWait wait;
     JavascriptExecutor jsExecutor;
-    String projectPath = System.getProperty("user.dir");
-
-
+    WebDriverWait wait;
     @BeforeClass
     public void beforeClass() {
-        //Disable chrome notification
-        System.setProperty("webdriver.chrome.driver", projectPath + "/drivers/chromedriver");
-        WebDriver driver = new ChromeDriver();
+        openBrowser();
         wait = new WebDriverWait(driver, 30);
-        jsExecutor = (JavascriptExecutor) driver;
 
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
     }
 
     @Test
     public void TC_01_Visible_Display() {
         visit("https://www.facebook.com");
 
+        //chờ email txtbox đc hiển thị trc khi sendkey
+        sendKey(By.id("email"), "Test");
     }
 
     @Test
-    public void TC_02_Multiple_Files_Per_Time() {
+    public void TC_02_Invisible_Undisplay_01() {
+        //Element ko co tren UI nhung van co trong HTML
+        visit("https://www.facebook.com");
+
+        click(By.xpath("//a[text()='Create new account']"));
+
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.name("reg_email_confirmation__")));
+
+        sendKey(By.name("reg_email__"), "hieu@gmail.com");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("reg_email_confirmation__")));
+
+    }
+    @Test
+    public void TC_03_Presence_01() {
+        //Dieu kien 1: Element co tren UI va co trong HTML
+        visit("https://www.facebook.com");
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("email")));
+    }
+
+    @Test
+    public void TC_03_Presence_02() {
+        //Dieu kien 2: Element ko co tren UI nhung van co trong HTML
+        visit("https://www.facebook.com");
+        click(By.xpath("//a[text()='Create new account']"));
+        sendKey(By.name("reg_email__"), "hieu@gmail.com");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.name("reg_email_confirmation__")));
+    }
+
+    @Test
+    public void TC_04_Staleness() {
+        //Apply both trong html va sau do dieu kien 3
+        visit("https://www.facebook.com");
+        click(By.xpath("//a[text()='Create new account']"));
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.name("reg_email_confirmation__")));
+
+        WebElement confirmEmail = driver.findElement(By.name("reg_email_confirmation__"));
+
+        click(By.xpath("//div[text()='Sign Up']/parent::div/preceding-sibling::img"));
+
+        wait.until(ExpectedConditions.stalenessOf(confirmEmail));
     }
 
     @AfterClass
