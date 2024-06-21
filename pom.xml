@@ -17,7 +17,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-server</artifactId>
-            <version>3.141.59</version>
+            <version>4.0.0-alpha-2</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -33,6 +33,7 @@
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>5.4.0</version>
+            <scope>test</scope>
         </dependency>
-    </dependencies>
+    </dependencies>/Users/lw13306/IdeaProjects/selenium-webdriver-testng/drivers/chromedriver
 </project>

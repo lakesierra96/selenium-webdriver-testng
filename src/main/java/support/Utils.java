@@ -23,9 +23,10 @@ public class Utils {
     private static WebDriverWait wait;
     public static WebDriver driver;
     private static JavascriptExecutor js;
+    static String projectPath = System.getProperty("user.dir");
 
     public static void openBrowser() {
-        initBrowser("firefox");
+        initBrowser("chrome");
         driver.manage().window().maximize();
     }
 
@@ -193,7 +194,7 @@ public class Utils {
     public static void initBrowser(String browserName) {
         switch (browserName.toLowerCase()) {
             case "chrome":
-                WebDriverManager.chromedriver().setup();
+                System.setProperty("webdriver.chrome.driver", projectPath + "/drivers/chromedriver");
                 driver = new ChromeDriver();
                 break;
             case "firefox":

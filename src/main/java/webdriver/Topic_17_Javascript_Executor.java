@@ -25,6 +25,7 @@ public class Topic_17_Javascript_Executor {
     WebDriverWait wait;
     Actions act;
     JavascriptExecutor jsExecutor;
+    String email = "test" + getRandomNumber() + "@gmail.com";
 
     @BeforeClass
     public void beforeClass() {
@@ -37,15 +38,15 @@ public class Topic_17_Javascript_Executor {
         act = new Actions(driver);
 
         jsExecutor = (JavascriptExecutor) driver;
+        //phải nằm dưới driver = new Chrome vì nằm trên sẽ lỗi do driver chưa đc sinh ra
+
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
 
     @Test
-    public void TC_02_Github_Greater_Two_Tabs() {
-        String email = "test" + getRandomNumber() + "@gmail.com";
-
+    public void TC_01_Javascript_Executor() {
         navigateToUrlByJS("http://live.techpanda.org/");
         String pageDomain = (String) executeForBrowser("return document.domain");
         Assert.assertEquals(pageDomain, "live.techpanda.org");
@@ -72,6 +73,22 @@ public class Topic_17_Javascript_Executor {
         Assert.assertTrue(areExpectedTextInInnerText("Thank you for your subscription."));
     }
 
+    @Test
+    public void TC_02_Verify_Html5_Validation_Message() {
+        navigateToUrlByJS("https://warranty.rode.com/");
+        click(By.xpath("//a[contains(text(),'Create an Account')]"));
+        sleepInSecond(2);
+        clickToElementByJS("//button[@type='submit']");
+
+        Assert.assertEquals(getElementValidationMessage("//input[@id='name']"), "Please fill out this field.");
+
+        sendKey(By.id("name"), "hieu");
+        clickToElementByJS("//button[@type='submit']");
+
+        Assert.assertEquals(getElementValidationMessage("//input[@id='email']"), "Please fill out this field.");
+
+        sendKey(By.id("email"), "hieu@gmail.com");
+    }
     @AfterClass
     public void tearDown() {
         //driver.quit();
