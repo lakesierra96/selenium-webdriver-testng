@@ -60,9 +60,31 @@ public class Topic_25_Wait_PV_Explicit_Wait {
             Assert.assertTrue(checkbox.isSelected());
         }
     }
+
+    @Test
+    public void TC_05_Wait_For_Number_Of_Element_To_Be() {
+        visit("https://automationfc.github.io/multiple-fields/");
+
+        sendKey(By.id("first_45"), "Test");
+
+        wait.until(ExpectedConditions.numberOfElementsToBe(By.cssSelector("input.form-checkbox"), 29));
+
+        List<WebElement> allCheckboxes = driver.findElements(By.xpath("//input[@class='form-checkbox']"));
+        System.out.println(allCheckboxes.size());
+        //scrollToViewElement(By.xpath("//input[contains(text(),'Patient Medical History')]"));
+        //Click all checkboxes
+        for (WebElement checkbox : allCheckboxes) {
+            checkbox.click();
+        }
+
+        for (WebElement checkbox : allCheckboxes) {
+            wait.until(ExpectedConditions.elementToBeSelected(checkbox));
+            Assert.assertTrue(checkbox.isSelected());
+        }
+    }
     @Test
     public void TC_04_Wait_For_Frame() {
-        visit("https://netbanking.hdfcbank.com/netbanking/");
+        visit("http://netbanking.hdfcbank.com/netbanking/");
 
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("login_page"));
         sendKey(By.name("fldLoginUserId"), "Automation");
@@ -72,6 +94,21 @@ public class Topic_25_Wait_PV_Explicit_Wait {
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("keyboard")));
         Assert.assertTrue(isDisplayed(By.id("keyboard")));
+    }
+
+    @Test
+    public void TC_06_Wait_For_GetText() {
+        visit("http://live.techpanda.org/index.php");
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='footer']//a[@title='My Account']")));
+        click(By.xpath("//div[@class='footer']//a[@title='My Account']"));
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.name("send")));
+        click(By.name("send"));
+
+        wait.until(ExpectedConditions.textToBe(By.id("advice-required-entry-email"), "This is a required field."));
+
+        Assert.assertEquals(getText(By.id("advice-required-entry-email")), "This is a required field.");
     }
 
     @AfterClass
