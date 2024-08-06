@@ -111,6 +111,34 @@ public class Topic_25_Wait_PV_Explicit_Wait {
         Assert.assertEquals(getText(By.id("advice-required-entry-email")), "This is a required field.");
     }
 
+    @Test
+    public void TC_07_Wait_For_Url_Title() {
+        visit("http://live.techpanda.org/index.php");
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='footer']//a[@title='My Account']")));
+        click(By.xpath("//div[@class='footer']//a[@title='My Account']"));
+
+        wait.until(ExpectedConditions.urlContains("customer/account/login/"));
+        Assert.assertEquals(driver.getCurrentUrl(), "http://live.techpanda.org/index.php/customer/account/login/");
+
+        wait.until(ExpectedConditions.titleIs("Customer Login"));
+        Assert.assertEquals(driver.getTitle(),"Customer Login");
+    }
+
+    @Test
+    public void TC_08_Wait_For_Element_Disappears() {
+        visit("https://automationfc.github.io/dynamic-loading/");
+
+        driver.findElement(By.xpath("//button[text()='Start']")).click();
+
+        //Wait for loading icon disappears
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("loading")));
+
+        //Wair for Hello world appears but no need since we have above wait
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("finish")));
+        Assert.assertEquals(getText(By.id("finish")), "Hello World!");
+    }
+
     @AfterClass
     public void tearDown() {
         //driver.quit();
