@@ -54,7 +54,7 @@ public class Utils {
 
     public static void waitForElementPresent(By element) {
         wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(element));
+        wait.until(ExpectedConditions.presenceOfElementLocated(element));
     }
 
     public static boolean isloadComplete() {
