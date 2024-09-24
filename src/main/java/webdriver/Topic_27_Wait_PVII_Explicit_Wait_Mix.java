@@ -34,7 +34,7 @@ public class Topic_27_Wait_PVII_Explicit_Wait_Mix {
         wait = new WebDriverWait(driver, 30);
     }
 
-    //bai nay xem  Topic 45
+    //bai nay xem video Topic 45
 
 
     @Test
