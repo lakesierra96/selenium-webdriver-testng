@@ -19,6 +19,7 @@ public class Topic_28_Wait_PVIII_Fluent {
     JavascriptExecutor jsExecutor;
     WebDriverWait wait;
     FluentWait<WebDriver> fluentWait;
+    FluentWait<WebElement> elementFluentWait;
     String projectPath = System.getProperty("user.dir");
 
     String firstImg = "FirstIMG.JPG";
@@ -101,18 +102,19 @@ public class Topic_28_Wait_PVIII_Fluent {
         visit("https://automationfc.github.io/dynamic-loading/");
         driver.findElement(By.xpath("//button[text()='Start']")).click();
 
-        fluentWait = new FluentWait<WebDriver>(driver);
+        elementFluentWait = new FluentWait<WebElement>(driver.findElement(By.xpath("//h4")));
 
-        fluentWait.withTimeout(Duration.ofSeconds(15))  //Tổng thgian chờ
+        elementFluentWait.withTimeout(Duration.ofSeconds(15))  //Tổng thgian chờ
                 .pollingEvery(Duration.ofMillis(100))   //Thgian tìm lại
                 .ignoring(NoSuchElementException.class);
 
-        fluentWait.until(new Function<WebDriver, WebElement>() {
+        elementFluentWait.until(new Function<WebElement, String>() {
             @Override
-            public WebElement apply(WebDriver driver) {
-                return getElement("//h4");
+            public String apply(WebElement element) {
+                return element.getText();
             }
         });
+
     }
 
     @AfterClass
