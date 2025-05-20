@@ -28,6 +28,7 @@ public class Topic_29_Page_Ready {
         @Test
         public void TC_01_Orange_HRM_API() {
             visit("https://api.orangehrm.com/");
+
         }
 
         @AfterClass
