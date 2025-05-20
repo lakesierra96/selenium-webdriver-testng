@@ -25,6 +25,8 @@ public class Utils {
     public static WebDriver driver;
     private static JavascriptExecutor js;
     static String projectPath = System.getProperty("user.dir");
+    static String osName = System.getProperty("os.name");
+
 
     public static void openBrowser() {
         initBrowser("chrome");
@@ -195,7 +197,11 @@ public class Utils {
     public static void initBrowser(String browserName) {
         switch (browserName.toLowerCase()) {
             case "chrome":
-                System.setProperty("webdriver.chrome.driver", projectPath + "/drivers/chromedriver");
+                if (osName.contains("Mac OS")) {
+                    System.setProperty("webdriver.chrome.driver", projectPath + "/drivers/chromedriver");
+                } else {
+                    System.setProperty("webdriver.chrome.driver", projectPath + "\\drivers\\chromedriver.exe");
+                }
                 driver = new ChromeDriver();
                 break;
             case "firefox":
