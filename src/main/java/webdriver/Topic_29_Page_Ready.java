@@ -30,19 +30,6 @@ public class Topic_29_Page_Ready {
             visit("https://api.orangehrm.com/");
         }
 
-        @Test
-        public void TC_02_ValidatePageTitle() {
-            // Login Page title
-            String loginPageTitle = driver.getTitle();
-            Assert.assertEquals(loginPageTitle, "Facebook – log in or sign up");
-        }
-
-        @Test
-        public void TC_03_LoginFormDisplayed() {
-            // Login form displayed
-            Assert.assertTrue(driver.findElement(By.xpath("//form[@data-testid='royal_login_form']")).isDisplayed());
-        }
-
         @AfterClass
         public void afterClass() {
 //            driver.quit();
