@@ -82,9 +82,9 @@ public class Topic_28_Wait_PVIII_Fluent {
         visit("https://automationfc.github.io/dynamic-loading/");
         driver.findElement(By.xpath("//button[text()='Start']")).click();
 
-        fluentWait = new FluentWait<WebDriver>(driver);
+        elementFluentWait = new FluentWait<WebElement>(driver.findElement(By.xpath("//h4")));
 
-        fluentWait.withTimeout(Duration.ofSeconds(15))  //Tổng thgian chờ
+        elementFluentWait.withTimeout(Duration.ofSeconds(15))  //Tổng thgian chờ
                 .pollingEvery(Duration.ofMillis(100))   //Thgian tìm lại
                 .ignoring(NoSuchElementException.class);
 

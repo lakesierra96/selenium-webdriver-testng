@@ -39,6 +39,15 @@ public class Topic_29_Page_Ready {
         click(By.xpath("//a[text()='Logout']"));
     }
 
+    @Test
+    public void TC_03_Blog_Test_Project() {
+        //Web die roi nen xem lai topic 47
+        visit("https://blog.testproject.io");
+        click(By.cssSelector("div.buttons"));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div#ajaxBusy")));
+        click(By.xpath("//a[text()='Logout']"));
+    }
+
 
     @AfterClass
     public void tearDown() {
