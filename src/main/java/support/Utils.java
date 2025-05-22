@@ -74,7 +74,6 @@ public class Utils {
         }
     }
 
-
     public static boolean isElementPresent(By locatorKey) {
         try {
             driver.findElement(locatorKey);
