@@ -28,7 +28,7 @@ public class Utils {
 
 
     public static void openBrowser() {
-        initBrowser("chrome");
+        initBrowser("firefox");
         driver.manage().window().maximize();
     }
 

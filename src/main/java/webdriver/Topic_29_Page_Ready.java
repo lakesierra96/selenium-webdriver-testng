@@ -1,9 +1,12 @@
 package webdriver;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -12,15 +15,23 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import javax.swing.*;
+
+import java.util.List;
+
 import static support.Utils.*;
 
 public class Topic_29_Page_Ready {
     WebDriverWait wait;
+    Actions act;
 
     @BeforeClass
     public void beforeClass() {
-        openBrowser();
+        //openBrowser();
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 30);
+        act = new Actions(driver);
     }
 
     @Test
@@ -43,9 +54,29 @@ public class Topic_29_Page_Ready {
     public void TC_03_Blog_Test_Project() {
         //Web die roi nen xem lai topic 47
         visit("https://blog.testproject.io");
-        click(By.cssSelector("div.buttons"));
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector("div#ajaxBusy")));
-        click(By.xpath("//a[text()='Logout']"));
+
+        //Di chuyển chuột vào 1 element bất kì thì page mới ready
+        act.moveToElement(driver.findElement(By.cssSelector("h1.main-heading"))).perform();
+
+        String keyword = "Selenium";
+    }
+
+    @Test
+    public void TC_04_Tricentis() {
+        visit("https://www.tricentis.com/search");
+
+        sendKey(By.xpath("//div[@class=' dark-theme  ']//input[@placeholder='Search']"), "selenium");
+        click(By.xpath("//div[@class=' dark-theme  ']//button[@type='submit']"));
+
+        String keyword = "testing";
+
+        //dùng contains khi value dài quá
+        //List<WebElement> searchResults = getElements(By.xpath("//div[contains(@class,'SearchResultItem')]//h2"));
+        List<WebElement> searchResults = getElements(By.xpath("h2"));
+
+        for (WebElement item : searchResults) {
+            Assert.assertTrue(item.getText().contains(keyword));
+        }
     }
 
 
