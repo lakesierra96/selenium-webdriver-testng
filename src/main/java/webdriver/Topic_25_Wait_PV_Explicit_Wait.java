@@ -11,9 +11,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
 import java.util.List;
-import java.util.Random;
 
 import static support.Utils.*;
 
