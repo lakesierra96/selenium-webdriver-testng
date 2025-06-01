@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Parameter">
+    <test name="Run on Firefox">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="webdriver.Topic_29_Page_Ready"/>
+        </classes>
+    </test>
+</suite>
