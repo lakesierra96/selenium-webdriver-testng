@@ -4,6 +4,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -24,8 +25,6 @@ public class Utils {
     public static WebDriver driver;
     private static JavascriptExecutor js;
     static String projectPath = System.getProperty("user.dir");
-    static String osName = System.getProperty("os.name");
-
 
     public static void openBrowser() {
         initBrowser("firefox");
@@ -195,16 +194,16 @@ public class Utils {
     public static void initBrowser(String browserName) {
         switch (browserName.toLowerCase()) {
             case "chrome":
-                if (osName.contains("Mac OS")) {
-                    System.setProperty("webdriver.chrome.driver", projectPath + "/drivers/chromedriver");
-                } else {
-                    System.setProperty("webdriver.chrome.driver", projectPath + "\\drivers\\chromedriver.exe");
-                }
+                System.setProperty("webdriver.chrome.driver", projectPath + "/drivers/chromedriver");
                 driver = new ChromeDriver();
                 break;
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
                 driver = new FirefoxDriver();
+                break;
+            case "edge":
+                WebDriverManager.edgedriver().setup();
+                driver = new EdgeDriver();
                 break;
             default:
                 System.err.println("The browser " + browserName + "is not supported");

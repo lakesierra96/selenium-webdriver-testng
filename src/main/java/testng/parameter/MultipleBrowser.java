@@ -3,6 +3,8 @@ package testng.parameter;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -14,14 +16,26 @@ import java.util.concurrent.TimeUnit;
 import static support.Utils.*;
 
 public class MultipleBrowser {
-    String browserName;
 
     @Parameters("browser")
     @BeforeClass
-    public void beforeClass() {
+    public void beforeClass(String browserName) {
+       /* if (browserName.equals("chrome")){
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver();
+        }
+        else if (browserName.equals("firefox")){
+            WebDriverManager.firefoxdriver().setup();
+            driver = new FirefoxDriver();
+        }
+        else if (browserName.equals("edge")){
+            WebDriverManager.edgedriver().setup();
+            driver = new EdgeDriver();
+        }
+        else{
+            throw new RuntimeException("Invalid browser");
+        }*/
         initBrowser(browserName);
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().window().maximize();
     }
