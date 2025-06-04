@@ -194,7 +194,7 @@ public class Utils {
     public static void initBrowser(String browserName) {
         switch (browserName.toLowerCase()) {
             case "chrome":
-                System.setProperty("webdriver.chrome.driver", projectPath + "/drivers/chromedriver");
+                WebDriverManager.chromedriver().setup();
                 driver = new ChromeDriver();
                 break;
             case "firefox":
@@ -206,7 +206,7 @@ public class Utils {
                 driver = new EdgeDriver();
                 break;
             default:
-                System.err.println("The browser " + browserName + "is not supported");
+                System.err.println("The browser " + browserName + " is not supported");
         }
     }
 

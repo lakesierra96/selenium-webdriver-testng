@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Parameter">
+    <parameter name="environment" value="live"/>
+
     <test name="Run on Chrome">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="testng.parameter.MultipleBrowser"/>
+            <class name="testng.parameter.MultipleEnvironment"/>
         </classes>
     </test>
 
     <test name="Run on Firefox">
         <parameter name="browser" value="firefox"/>
         <classes>
-            <class name="testng.parameter.MultipleBrowser"/>
+            <class name="testng.parameter.MultipleEnvironment"/>
         </classes>
     </test>
 
     <test name="Run on Edge">
-        <parameter name="browser" value="edge"/>
+        <parameter name="browser" value="invalid"/>
         <classes>
-            <class name="testng.parameter.MultipleBrowser"/>
+            <class name="testng.parameter.MultipleEnvironment"/>
         </classes>
     </test>
 </suite>
