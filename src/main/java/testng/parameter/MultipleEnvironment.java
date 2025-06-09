@@ -36,12 +36,14 @@ public class MultipleEnvironment {
     }
 
     @Parameters("environment")
-    @Test
+    @Test(invocationCount = 3)
     public void TC_01_Login(String environmentName) {
         visit(getEnvironmentName(environmentName) + "index.php/customer/account/login/");
         sendKey(By.id("email"), "selenium_11_01@gmail.com");
         sendKey(By.id("pass"), "111111");
         click(By.name("send"));
+        click(By.xpath("//header[@id='header']//span[text()='Account']"));
+        click(By.linkText("Log Out"));
     }
 
     public String getEnvironmentName(String environmentName) {

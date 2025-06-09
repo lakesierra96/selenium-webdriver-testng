@@ -45,11 +45,14 @@ public class MultipleBrowser {
         visit("https://live.techpanda.org/index.php/customer/account/login/");
         sendKey(By.id("email"), "selenium_11_01@gmail.com");
         sendKey(By.id("pass"), "111111");
-        click(By.name("send"));
+        click(By.id("send2"));
+        Assert.assertTrue(getText(By.xpath("//div[@class='col-1']//p")).contains("selenium_11_01@gmail.com"));
+        click(By.xpath("//header[@id='header']//span[text()='Account']"));
+        click(By.linkText("Log Out"));
     }
 
     @AfterClass(alwaysRun = true)
     public void afterClass() {
-        driver.quit();
+       // driver.quit();
     }
 }
