@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Tiki - Mobile Automation UI">
+
+    <test name="Run on Chrome">
+        <classes>
+            <class name="testng.mobileApp.Customer"/>
+        </classes>
+    </test>
+
+</suite>

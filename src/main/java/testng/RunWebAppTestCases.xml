@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Tiki - Web Automation UI">
+
+    <test name="Run on Chrome">
+        <classes>
+            <class name="testng.webApp.Customer"/>
+        </classes>
+    </test>
+
+</suite>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Tiki - Automation API Level">
+
+    <test name="Run on Chrome">
+        <classes>
+            <class name="testng.apiLevel.Customer"/>
+        </classes>
+    </test>
+
+</suite>
