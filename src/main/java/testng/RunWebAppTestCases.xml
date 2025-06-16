@@ -2,9 +2,21 @@
 <suite name="Tiki - Web Automation UI">
 
     <test name="Run on Chrome">
-        <classes>
-            <class name="testng.webApp.Customer"/>
-        </classes>
+        <parameter name="browserName" value="chrome" />
+        <parameter name="browserVerion" value="125" />
+        <parameter name="platform" value="windows" />
+        <packages>
+            <package name="testng.webApp" />
+        </packages>
+    </test>
+
+    <test name="Run on Firefox">
+        <parameter name="browserName" value="firefox" />
+        <parameter name="browserVerion" value="125" />
+        <parameter name="platform" value="mac" />
+        <packages>
+            <package name="testng.webApp" />
+        </packages>
     </test>
 
 </suite>

@@ -47,7 +47,7 @@ public class MultipleEnvironment {
     }
 
     public String getEnvironmentName(String environmentName) {
-        String url = null;
+        String url;
         if (environmentName.toLowerCase().equals("dev")) {
             url = "https://dev.techpanda.org/";
         } else if (environmentName.toLowerCase().equals("staging")) {

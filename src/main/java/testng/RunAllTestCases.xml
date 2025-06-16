@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite parallel="false" name="Tiki - Web Automation UI - All Suites">
+
+    <suite-files>
+        <suite-file path="RunAPITestCases.xml" />
+        <suite-file path="RunMobileAppTestCases.xml" />
+        <suite-file path="RunWebAppTestCases.xml" />
+    </suite-files>
+
+</suite>

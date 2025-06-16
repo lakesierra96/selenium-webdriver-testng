@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<suite name="Tiki - Automation API Level">
+<suite parallel="false" name="Tiki - Automation API Level">
 
     <test name="Run on Chrome">
         <classes>
