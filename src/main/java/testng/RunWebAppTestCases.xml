@@ -5,18 +5,18 @@
         <parameter name="browserName" value="chrome" />
         <parameter name="browserVerion" value="125" />
         <parameter name="platform" value="windows" />
-        <classes>
-            <class name="testng.webApp.Customer"/>
-        </classes>
+        <packages>
+            <package name="testng.webApp" />
+        </packages>
     </test>
 
     <test name="Run on Firefox">
         <parameter name="browserName" value="firefox" />
         <parameter name="browserVerion" value="125" />
         <parameter name="platform" value="mac" />
-        <classes>
-            <class name="testng.webApp.Customer"/>
-        </classes>
+        <packages>
+            <package name="testng.webApp" />
+        </packages>
     </test>
 
 </suite>
