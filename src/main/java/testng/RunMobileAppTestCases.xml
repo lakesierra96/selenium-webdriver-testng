@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Tiki - Mobile Automation UI">
 
-    <test name="Run on Chrome">
+    <test name="Run on Samsung Note 20 Ultra">
+        <parameter name="device" value="note20" />
+        <parameter name="uuid" value="2343523423" />
+        <parameter name="platform" value="android" />
+        <classes>
+            <class name="testng.mobileApp.Customer"/>
+        </classes>
+    </test>
+
+    <test name="Run on Samsung Iphone 12 Pro">
+        <parameter name="device" value="iphone12pro" />
+        <parameter name="uuid" value="2343523423" />
+        <parameter name="platform" value="ios" />
         <classes>
             <class name="testng.mobileApp.Customer"/>
         </classes>
